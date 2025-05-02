@@ -35,15 +35,15 @@ func DownloadToSingleMP3(m3u8URL string, outputFilename string, metadata map[str
 		}
 	}
 
-	fmt.Printf("books/%s/%s.png", strings.Split(outputFilename,`/`)[2], strings.Split(outputFilename,`/`)[2])
+	//fmt.Printf("books/%s/%s.png", strings.Split(outputFilename,`/`)[2], strings.Split(outputFilename,`/`)[2])
 	cmdArgs := []string{
 		"-i", m3u8URL,
-		"-i", fmt.Sprintf("books/%s/%s.png", strings.Split(outputFilename,`/`)[2], strings.Split(outputFilename,`/`)[2]),
+		/*"-i", fmt.Sprintf("books/%s/%s.png", strings.Split(outputFilename,`/`)[2], strings.Split(outputFilename,`/`)[2]),
 		"-map", "0:0",
 		"-map", "1:0",
 		"-id3v2_version", "3",
 		"-metadata:s:v", `title="Album cover"`, 
-		"-metadata:s:v", `comment="Cover (front)"`,
+		"-metadata:s:v", `comment="Cover (front)"`,*/
 		"-vn",
 		"-c:a", "libmp3lame",
 		"-ab", "192k",
