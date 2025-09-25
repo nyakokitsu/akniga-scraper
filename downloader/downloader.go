@@ -46,7 +46,7 @@ func DownloadToSingleMP3(m3u8URL string, outputFilename string, metadata map[str
 		"-metadata:s:v", `comment="Cover (front)"`,*/
 		"-vn",
 		"-c:a", "libmp3lame",
-		"-ab", "192k",
+		"-ab", "32k",
 	}
 
 	for key, value := range metadata {
