@@ -80,7 +80,7 @@ func main() {
 	fmt.Println("URL:", *urlPtr)
 	fmt.Println("Poster:", *posterPtr)
 
-	pattern := `^https?://` + regexp.QuoteMeta("akniga.org") + `\/([\w-]+)-(\d+)$`
+	pattern := `^https?://` + regexp.QuoteMeta("akniga.org") + `\/([\w-]+)(-(\d+))?$`
 	regex, err := regexp.Compile(pattern)
 	if err != nil {
 		fmt.Println("Error compiling regex:", err)
