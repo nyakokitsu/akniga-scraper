@@ -15,32 +15,26 @@ import (
 const (
 	//decrypt-password got from js script of akniga.
 	//i've got all string parts and tried to brute password.
-	password   = "EKxtcg46V" 
-	keyLen     = 32
-	ivLen      = 16
+	password    = "EKxtcg46V"
+	keyLen      = 32
+	ivLen       = 16
 	kdfHashAlgo = "md5"
 )
 
-type encryptedData struct {
-	Ct string `json:"ct"`
-	Iv string `json:"iv"`
-	S  string `json:"s"`
-}
-
 func DecodeURL(inputJSON string) (string, error) {
-	var data encryptedData
+	var data CipherParams
 	err := json.Unmarshal([]byte(inputJSON), &data)
 	if err != nil {
 		return "", fmt.Errorf("failed to unmarshal JSON: %w", err)
 	}
 
-	ctBase64 := strings.ReplaceAll(data.Ct, "\\/", "/")
+	ctBase64 := strings.ReplaceAll(data.CT, "\\/", "/")
 	ciphertext, err := base64.StdEncoding.DecodeString(ctBase64)
 	if err != nil {
 		return "", fmt.Errorf("failed to decode base64 ciphertext: %w", err)
 	}
 
-	iv, err := hex.DecodeString(data.Iv)
+	iv, err := hex.DecodeString(data.IV)
 	if err != nil {
 		return "", fmt.Errorf("failed to decode hex IV: %w", err)
 	}
@@ -86,8 +80,6 @@ func DecodeURL(inputJSON string) (string, error) {
 	if finalURL == "" {
 		return "", errors.New("decryption resulted in an empty string")
 	}
-	
-	
 
 	return finalURL, nil
 }
@@ -149,4 +141,3 @@ func pkcs7Unpad(data []byte) ([]byte, error) {
 
 	return data[:length-paddingLen], nil
 }
-
